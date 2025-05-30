@@ -54,7 +54,7 @@
         {{ room.name }}
       </text>
     </g>
-    </svg>
+
   </div>
 </template>
 
