@@ -1,9 +1,14 @@
 module.exports = {
   env: {
-    browser: true,
-    es2021: true,
-    jest: true
-  },
+  browser: true,
+  es6: true,
+  jest: true
+},
+parserOptions: {
+  ecmaVersion: 2021,  // 这一行才真正控制 ES 的语法版本
+  sourceType: 'module'
+},
+
   extends: [
     'eslint:recommended',
     'plugin:vue/vue3-recommended'
