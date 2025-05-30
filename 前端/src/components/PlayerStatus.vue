@@ -1,5 +1,4 @@
 <template>
-
   <div class="player-status">
     <h3>玩家状态</h3>
     <p>姓名：{{ name }}</p>
@@ -14,7 +13,7 @@ export default {
     name: String,
     currentRoom: String
   }
-}
+};
 </script>
 
 <style scoped>

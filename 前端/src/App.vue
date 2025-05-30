@@ -2,12 +2,20 @@
   <div class="app-wrapper">
     <!-- 顶部标题 -->
     <div class="game-header">
-      <h1 class="animated-title">🌍 World of Zuul</h1>
+      <h1 class="animated-title">
+        🌍 World of Zuul
+      </h1>
     </div>
 
     <!-- 雪花天气效果 -->
     <div class="weather-effect">
-      <div class="snowflake" v-for="n in 20" :key="n">❄</div>
+      <div
+        v-for="n in 20"
+        :key="n"
+        class="snowflake"
+      >
+        ❄
+      </div>
     </div>
 
     <!-- 页面布局：只保留中间游戏主视图 -->

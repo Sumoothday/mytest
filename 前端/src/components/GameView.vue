@@ -10,55 +10,87 @@
       <!-- 右侧：地图 + 操作面板 -->
       <div class="right-panel">
         <div class="map-panel">
-          <h3 class="panel-title">🗺 当前地图</h3>
+          <h3 class="panel-title">
+            🗺 当前地图
+          </h3>
           <div class="map-container">
-            <RoomMap :currentRoom="roomName" mode="small" :scale="1" />
+            <RoomMap
+              :current-room="roomName"
+              mode="small"
+              :scale="1"
+            />
           </div>
           <div class="map-controls">
-            <button @click="toggleMap" class="map-btn">🔍 完整地图</button>
-            <button @click="toggleInfo" class="info-btn">📋 信息面板</button>
+            <button
+              class="map-btn"
+              @click="toggleMap"
+            >
+              🔍 完整地图
+            </button>
+            <button
+              class="info-btn"
+              @click="toggleInfo"
+            >
+              📋 信息面板
+            </button>
           </div>
         </div>
         <div class="controls-panel">
-          <slot name="controls"></slot>
+          <slot name="controls" />
         </div>
       </div>
     </div>
 
     <!-- 信息侧边栏 -->
     <transition name="slide">
-      <div v-show="panelOpen" class="info-sidepanel">
+      <div
+        v-show="panelOpen"
+        class="info-sidepanel"
+      >
         <SidePanel
-          @close="panelOpen = false"
           :name="playerName"
-          :currentRoom="roomName"
+          :current-room="roomName"
           :inventory="inventory"
-          :totalWeight="totalWeight"
-          :weightLimit="weightLimit"
-          :roomItems="roomItems"
+          :total-weight="totalWeight"
+          :weight-limit="weightLimit"
+          :room-items="roomItems"
+          @close="panelOpen = false"
         />
       </div>
     </transition>
 
     <!-- 全屏地图侧边栏 -->
     <transition name="slide">
-      <div v-show="mapPanelOpen" class="map-sidepanel">
+      <div
+        v-show="mapPanelOpen"
+        class="map-sidepanel"
+      >
         <div class="sidepanel-header">
           <h2>🗺 全屏地图</h2>
-          <button class="close-btn" @click="mapPanelOpen = false">❌</button>
+          <button
+            class="close-btn"
+            @click="mapPanelOpen = false"
+          >
+            ❌
+          </button>
         </div>
-        <RoomMap :currentRoom="roomName" mode="full" :scale="1" class="full-map" />
+        <RoomMap
+          :current-room="roomName"
+          mode="full"
+          :scale="1"
+          class="full-map"
+        />
       </div>
     </transition>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import GameDisplay from './GameDisplay.vue'
-import CommandInput from './CommandInput.vue'
-import RoomMap from './RoomMap.vue'
-import SidePanel from './SidePanel.vue'
+import { mapState, mapActions } from 'vuex';
+import GameDisplay from './GameDisplay.vue';
+import CommandInput from './CommandInput.vue';
+import RoomMap from './RoomMap.vue';
+import SidePanel from './SidePanel.vue';
 
 export default {
   name: 'GameView',
@@ -67,7 +99,7 @@ export default {
     return {
       panelOpen: false,
       mapPanelOpen: false
-    }
+    };
   },
   computed: {
     ...mapState([
@@ -83,21 +115,21 @@ export default {
   methods: {
     ...mapActions(['sendCommand', 'enterRoom']),
     toggleInfo() {
-      this.mapPanelOpen = false
-      this.panelOpen = !this.panelOpen
+      this.mapPanelOpen = false;
+      this.panelOpen = !this.panelOpen;
     },
     toggleMap() {
-      this.panelOpen = false
-      this.mapPanelOpen = !this.mapPanelOpen
+      this.panelOpen = false;
+      this.mapPanelOpen = !this.mapPanelOpen;
     }
   },
   watch: {
     // 只要 roomName 变了，就把它记到 visitedRooms
     roomName(newRoom) {
-      this.enterRoom(newRoom)
+      this.enterRoom(newRoom);
     }
   }
-}
+};
 </script>
 
 

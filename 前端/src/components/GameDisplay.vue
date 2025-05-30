@@ -11,10 +11,26 @@
           :key="colIndex"
           class="grid-cell"
         >
-          <img v-if="cell === 'player'" src="@/assets/player.png" alt="player" />
-          <img v-else-if="cell === 'monster'" src="@/assets/monster.png" alt="monster" />
-          <img v-else-if="cell === 'chest'" src="@/assets/chest.png" alt="chest" />
-          <img v-else-if="cell === 'trap'" src="@/assets/chest.png" alt="trap" />
+          <img
+            v-if="cell === 'player'"
+            src="@/assets/player.png"
+            alt="player"
+          >
+          <img
+            v-else-if="cell === 'monster'"
+            src="@/assets/monster.png"
+            alt="monster"
+          >
+          <img
+            v-else-if="cell === 'chest'"
+            src="@/assets/chest.png"
+            alt="chest"
+          >
+          <img
+            v-else-if="cell === 'trap'"
+            src="@/assets/chest.png"
+            alt="trap"
+          >
         </div>
       </div>
     </div>
@@ -22,29 +38,29 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
 
 export default {
   name: 'GameDisplay',
   computed: {
     ...mapState(['roomMap', 'roomName']),
     currentRoomLayout() {
-      const room = this.roomMap.rooms.find(r => r.name === this.roomName)
-      return room && room.layout ? room.layout : []
+      const room = this.roomMap.rooms.find(r => r.name === this.roomName);
+      return room && room.layout ? room.layout : [];
     },
     paddedLayout() {
-      const ROWS = 6
-      const COLS = 6
-      const layout = this.currentRoomLayout.map(r => Array.from(r))
-      while (layout.length < ROWS) layout.push([])
+      const ROWS = 6;
+      const COLS = 6;
+      const layout = this.currentRoomLayout.map(r => Array.from(r));
+      while (layout.length < ROWS) layout.push([]);
       return layout.map(row => {
-        const newRow = Array.from(row)
-        while (newRow.length < COLS) newRow.push(null)
-        return newRow
-      })
+        const newRow = Array.from(row);
+        while (newRow.length < COLS) newRow.push(null);
+        return newRow;
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>

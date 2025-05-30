@@ -1,8 +1,13 @@
 <template>
-  <div class="side-panel" :class="{ open: isOpen }">
+  <div
+    class="side-panel"
+    :class="{ open: isOpen }"
+  >
     <div class="header">
       <span>📋 游戏信息</span>
-      <button @click="$emit('close')">✖</button>
+      <button @click="$emit('close')">
+        ✖
+      </button>
     </div>
 
     <div class="section">
@@ -15,7 +20,10 @@
       <h4>🎒 玩家背包</h4>
       <p>总重量：{{ totalWeight }} / {{ weightLimit }}</p>
       <ul>
-        <li v-for="item in inventory" :key="item.name">
+        <li
+          v-for="item in inventory"
+          :key="item.name"
+        >
           {{ item.name }} x{{ item.quantity }}
         </li>
       </ul>
@@ -24,7 +32,12 @@
     <div class="section">
       <h4>📦 房间内物品</h4>
       <ul>
-        <li v-for="item in roomItems" :key="item.name">{{ item.name }}</li>
+        <li
+          v-for="item in roomItems"
+          :key="item.name"
+        >
+          {{ item.name }}
+        </li>
       </ul>
     </div>
   </div>
@@ -33,7 +46,7 @@
 <script>
 export default {
   props: ['isOpen', 'name', 'currentRoom', 'inventory', 'totalWeight', 'weightLimit', 'roomItems']
-}
+};
 </script>
 
 <style scoped>
