@@ -11,7 +11,7 @@
     </div>
 
     <!-- 页面布局：只保留中间游戏主视图 -->
-    <div class="page-layout">
+    <div class="  page-layout">
       <div class="center-game">
         <router-view />
       </div>
