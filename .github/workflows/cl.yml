@@ -10,13 +10,22 @@ jobs:
       - name: 拉取代码
         uses: actions/checkout@v4
 
-      - name: 设置 Node 环境
+      - name: 设置 Node.js 环境
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
       - name: 安装依赖
-        run: npm install
+        run: |
+          cd 前端
+          npm install
 
       - name: 代码风格检查
-        run: npm run lint
+        run: |
+          cd 前端
+          npm run lint
+
+      - name: 构建项目
+        run: |
+          cd 前端
+          npm run build
