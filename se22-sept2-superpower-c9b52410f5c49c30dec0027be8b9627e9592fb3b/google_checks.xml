@@ -7,9 +7,11 @@
     <property name="severity" value="error"/>
 
     <module name="TreeWalker">
-        <!-- 常量命名：默认规则 + 忽略 logger 变量 -->
+        <!-- 常量命名：允许全大写下划线风格，或恰好是 logger -->
         <module name="ConstantName">
-            <property name="ignorePattern" value="^logger$"/>
+            <property name="format"
+                      value="^(?:[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*)|logger$"/>
+            <!-- 你也可以根据需要调整 applyToXxx 范围，默认即可 -->
         </module>
 
         <module name="LocalVariableName"/>
@@ -19,13 +21,13 @@
         <module name="ParameterName"/>
         <module name="TypeName"/>
 
-        <!-- 关闭对 @param/@return 的强制检查 -->
+        <!-- 放宽 Javadoc 检查 -->
         <module name="JavadocMethod">
             <property name="allowMissingParamTags" value="true"/>
             <property name="allowMissingReturnTag" value="true"/>
         </module>
-
         <module name="JavadocType"/>
+
         <module name="UnusedImports"/>
     </module>
 
