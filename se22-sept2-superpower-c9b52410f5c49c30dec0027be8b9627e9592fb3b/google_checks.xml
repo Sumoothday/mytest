@@ -5,21 +5,30 @@
 <module name="Checker">
     <property name="charset" value="UTF-8"/>
     <property name="severity" value="error"/>
-    
+
     <module name="TreeWalker">
-       
-        <module name="ConstantName"/>
+        <!-- 常量命名：默认规则 + 忽略 logger 变量 -->
+        <module name="ConstantName">
+            <property name="ignorePattern" value="^logger$"/>
+        </module>
+
         <module name="LocalVariableName"/>
         <module name="MemberName"/>
         <module name="MethodName"/>
         <module name="PackageName"/>
         <module name="ParameterName"/>
         <module name="TypeName"/>
-        <module name="JavadocMethod"/>
+
+        <!-- 关闭对 @param/@return 的强制检查 -->
+        <module name="JavadocMethod">
+            <property name="allowMissingParamTags" value="true"/>
+            <property name="allowMissingReturnTag" value="true"/>
+        </module>
+
         <module name="JavadocType"/>
         <module name="UnusedImports"/>
     </module>
-    
+
     <module name="FileTabCharacter">
         <property name="eachLine" value="true"/>
     </module>
