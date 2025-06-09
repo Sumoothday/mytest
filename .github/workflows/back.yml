@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -20,7 +21,10 @@ jobs:
           distribution: temurin
           cache: maven
 
-      - name: Full build, format, style check, and tests
-        # clean verify 会依次执行 process-sources（Spotless apply/check）、
-        # verify（Checkstyle）以及 test
+      - name: Inspect workspace
+        run: |
+          echo "Working directory: $(pwd)"
+          ls -la .
+
+      - name: Full build, format & style check, and tests
         run: mvn -B clean verify
