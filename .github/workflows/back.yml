@@ -2,13 +2,14 @@ name: Backend Code Quality and Tests
 
 on:
   push:
-    branches: [ main]
+    branches: [ main ]
   pull_request:
-    branches: [ main]
+    branches: [ main ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -18,14 +19,16 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
-          cache: maven  # 自动缓存Maven依赖
+          cache: maven  # 自动缓存 Maven 依赖
 
       - name: Validate code format with Spotless
-        run: mvn spotless:check
+        working-directory: demo1111111
+        run: mvn -B spotless:check
 
       - name: Validate code style with Checkstyle
-        run: mvn checkstyle:check
+        working-directory: demo1111111
+        run: mvn -B checkstyle:check
 
-      # 新增测试步骤（确保项目能编译并通过测试）
       - name: Run unit tests
-        run: mvn test
+        working-directory: demo1111111
+        run: mvn -B test
