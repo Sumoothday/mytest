@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- 使用 Spring Boot 3.5.0 -->
+    <!-- 继承 Spring Boot 管理的依赖和插件版本 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -22,75 +22,61 @@
     <properties>
         <java.version>17</java.version>
         <lombok.version>1.18.30</lombok.version>
-        <!-- Spring Boot 3.5.0 默认使用 Hibernate 6.x，无需手动配置 -->
     </properties>
 
     <dependencies>
-        <!-- Spring Boot 测试依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- H2 内存数据库 -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Spring Security 测试支持 -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+        <!-- Web & JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- MySQL 8.0 驱动（使用 Spring Boot 3.x 默认的驱动名称） -->
+        <!-- MySQL 驱动 -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
-            <optional>true</optional>
         </dependency>
 
+        <!-- 测试相关 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <!-- 由 Parent 管理版本 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!-- Spotless 自动格式化插件 -->
+
+            <!-- Spotless 自动格式化 -->
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
@@ -109,15 +95,16 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>format-java</id>
                         <phase>process-sources</phase>
                         <goals>
-                            <goal>apply</goal> <!-- 编译时自动格式化 -->
+                            <goal>apply</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
 
-            <!-- Checkstyle 规范检查插件 -->
+            <!-- Checkstyle 代码检查 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -126,18 +113,12 @@
                     <configLocation>google_checks.xml</configLocation>
                     <failOnViolation>true</failOnViolation>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.1.5</version>
-                <configuration>
-                    <mainClass>com.example.demo.DemoApplication</mainClass>
-                </configuration>
                 <executions>
                     <execution>
+                        <id>checkstyle</id>
+                        <phase>verify</phase>
                         <goals>
-                            <goal>repackage</goal>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
