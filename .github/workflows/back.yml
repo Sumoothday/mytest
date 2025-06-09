@@ -17,14 +17,18 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: 17
           distribution: temurin
-          cache: maven
+          cache: maven  # 自动缓存 Maven 依赖
 
-      - name: Inspect workspace
-        run: |
-          echo "Working directory: $(pwd)"
-          ls -la .
+      - name: Validate code format with Spotless
+        working-directory: se22-sept2-superpower-c9b52410f5c49c30dec0027be8b9627e9592fb3b
+        run: mvn -B spotless:check
 
-      - name: Full build, format & style check, and tests
-        run: mvn -B clean verify
+      - name: Validate code style with Checkstyle
+        working-directory: se22-sept2-superpower-c9b52410f5c49c30dec0027be8b9627e9592fb3b
+        run: mvn -B checkstyle:check
+
+      - name: Run unit tests
+        working-directory: se22-sept2-superpower-c9b52410f5c49c30dec0027be8b9627e9592fb3b
+        run: mvn -B test
