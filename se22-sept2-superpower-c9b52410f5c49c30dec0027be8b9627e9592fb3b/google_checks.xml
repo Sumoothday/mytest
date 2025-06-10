@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<module name="Checker">
+    <property name="charset" value="UTF-8"/>
+    <property name="severity" value="error"/>
+
+    <module name="TreeWalker">
+        <!-- 常量命名：允许全大写下划线风格，或恰好是 logger -->
+        <module name="ConstantName">
+            <property name="format"
+                      value="^(?:[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*)|logger$"/>
+            <!-- 你也可以根据需要调整 applyToXxx 范围，默认即可 -->
+        </module>
+
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName"/>
+        <module name="PackageName"/>
+        <module name="ParameterName"/>
+        <module name="TypeName"/>
+
+        <!-- 放宽 Javadoc 检查 -->
+        <module name="JavadocMethod">
+            <property name="allowMissingParamTags" value="true"/>
+            <property name="allowMissingReturnTag" value="true"/>
+        </module>
+        <module name="JavadocType"/>
+
+        <module name="UnusedImports"/>
+    </module>
+
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+</module>
