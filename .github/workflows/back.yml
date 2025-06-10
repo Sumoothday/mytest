@@ -2,9 +2,9 @@ name: Backend Code Quality and Tests
 
 on:
   push:
-    branches: [ main，xds前端 ]
+    branches: [ main，夏]
   pull_request:
-    branches: [ main,xds前端 ]
+    branches: [ main,夏]
 
 jobs:
   build-and-test:
