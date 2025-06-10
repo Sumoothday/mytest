@@ -2,9 +2,10 @@ name: Backend Code Quality and Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main，夏]
   pull_request:
-    branches: [ main ]
+    branches: [ main,夏]
+
 
 jobs:
   build-and-test:
@@ -22,13 +23,15 @@ jobs:
           cache: maven  # 自动缓存 Maven 依赖
 
       - name: Validate code format with Spotless
-        working-directory: se22-sept2-superpower-c9b52410f5c49c30dec0027be8b9627e9592fb3b
+
+        working-directory: 后端
         run: mvn -B spotless:check
 
       - name: Validate code style with Checkstyle
-        working-directory: se22-sept2-superpower-c9b52410f5c49c30dec0027be8b9627e9592fb3b
+        working-directory: 后端
         run: mvn -B checkstyle:check
 
       - name: Run unit tests
-        working-directory: se22-sept2-superpower-c9b52410f5c49c30dec0027be8b9627e9592fb3b
+        working-directory: 后端
+
         run: mvn -B test
