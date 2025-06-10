@@ -12,26 +12,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'  # 自动缓存 npm 依赖（简化写法）
-
+        
       - name: 安装依赖
         run: |
           cd 前端
-          npm install --production=false  # 生产环境可跳过 devDependencies
-
+          npm install --production=false  
       - name: 代码风格检查
         run: |
           cd 前端
-          npm run lint -- --fix  # 自动修复可纠正的格式问题（可选）
-
+          npm run lint 
       - name: 构建生产包
         run: |
           cd 前端
           npm run build
-          ls -lh 前端/dist  # 输出构建产物列表（调试用）
-
+  
       - name: 上传构建产物
         uses: actions/upload-artifact@v4
         with:
-          name: vue-frontend-dist
+          name: vue-frontend-distsrserew
           path: 前端/dist/
